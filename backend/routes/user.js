@@ -4,9 +4,11 @@ const { userModel } = require('../db');
 const UserRouter = Router();
 const bcrypt = require('bcryptjs')
 const { usermiddleware } = require('../middleware/usermiddleware'); 
-
+const {JWT_SECRET_USER} = require('../config')
 const jwt = require('jsonwebtoken')
 
+//itha pn ekda check kelo import zalela secrte yetay ka ani vaprlo te
+console.log(JWT_SECRET_USER)
 UserRouter.post('/signup', async (req, res) => {
     try {
         const requiredbody = z.object({
@@ -18,7 +20,7 @@ UserRouter.post('/signup', async (req, res) => {
         })
 
         const parsedbody = await requiredbody.safeParse(req.body);
-        const Jwt_user_secrte = "kahi"
+        
         if (!parsedbody.success) {
             res.status(404).json({
                 message: "You have entered wrong input",
@@ -38,9 +40,11 @@ UserRouter.post('/signup', async (req, res) => {
             image
         })
 
+
+        //ani hya madhe te import kelala vaprlo secrte tr mg suru za;a
         const token = await jwt.sign({
             id: user._id
-        }, Jwt_user_secrte)
+        }, JWT_SECRET_USER)
 
         res.status(200).json({
             alert: "Password verified successfully",
