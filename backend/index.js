@@ -2,30 +2,27 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const mongoose = require('mongoose');
-const { userRouter } = require('./routes/user');
-const { usermiddleware } = require('./middleware/usermiddleware');
+const { UserRouter } = require('./routes/user');
+ const { usermiddleware } = require('./middleware/usermiddleware');
+require('dotenv').config();
 
 
 app.use(express.json());
 
-app.use('/user', userRouter);
-app.use('/user', usermiddleware);
-
+ app.use('/user', usermiddleware);
+app.use('/user', UserRouter);
 
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGODB_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        })
+        await mongoose.connect(process.env.MONGODB_URI)
         console.log('MongoDB connected');
     } catch (error) {
         console.log('MongoDB connection error:', error);
-        process.exit(1);
     }
 }
-module.exports = connectDB
+
+connectDB();
 
 
 
