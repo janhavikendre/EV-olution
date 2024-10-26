@@ -1,6 +1,9 @@
 require('dotenv').config();
-const Jwt_user_secrte = process.env.JWT_SECRETE_USER;
+const JWT_SECRET_USER = process.env.JWT_SECRET_USER;
 
+console.log(JWT_SECRET_USER)
 module.exports = {
-    Jwt_user_secrte:Jwt_user_secrte
+    JWT_SECRET_USER
 }
+
+//itha me sagla capital kelo bgh karan spelling misatke hothya manunch he ithun import hoth navta kay
