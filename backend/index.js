@@ -5,11 +5,16 @@ const mongoose = require('mongoose');
 const { UserRouter } = require('./routes/user');
  const { usermiddleware } = require('./middleware/usermiddleware');
 require('dotenv').config();
-
-
+//itha me te config madhun yetay ka check kelo ./config
+const {JWT_SECRET_USER} = require('./config')
+//ani itha print karun pahilo tr mg ala 
+console.log(JWT_SECRET_USER)
 app.use(express.json());
 
- app.use('/user', usermiddleware);
+
+
+//itha me te usermiddleware delte kelo karan ajun signupch kelo nahi mg kay garaj tachyi
+//  app.use('/user', usermiddleware);
 app.use('/user', UserRouter);
 
 
